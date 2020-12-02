@@ -16,7 +16,12 @@ describe('Deck', function() {
 
   it('should initlize with array of Card objects', () => {
     expect(deck.cards).to.be.an('array');
-    //is there anything else that needs to be checked?
+    expect(deck.cards[1]).to.deep.equal({
+      "id": 8,
+      "question": "What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?",
+      "answers": ['dove', 'ruffed grouse', 'wild turkey'],
+      "correctAnswer": "wild turkey"
+    })
   });
 
   it('should count how many cards there are', () => {
