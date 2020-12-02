@@ -51,9 +51,11 @@ describe('Round', function() {
   });
 
 
-  it.skip('should update current card to reflect next card in deck', () => {
-    //when turn happens, does the current card match the next card in the deck.cards array?
-    //try more than once
+  it('should update current card to reflect next card in deck', () => {
+    round.takeTurn();
+    expect(round.currentCard).to.equal(card2);
+    round.takeTurn();
+    expect(round.currentCard).to.equal(card3);
   });
 
   it.skip('should record and evaluate guess', () => {
