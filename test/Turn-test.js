@@ -4,17 +4,23 @@ const Card = require('../src/Card');
 const Turn = require('../src/Card');
 
 describe('Turn', function() {
-
-  it.skip('should be a function', () => {
-    //does it exist?
+  let turn;
+  beforeEach(() => {
+    return turn = new Turn();
   })
 
-  it.skip('should be an instance of Card', () => {
-    //does it exist?
+  it('should be a function', () => {
+    expect(Turn).to.be.a('function');
   })
 
-  it.skip('should store the user\'s guess', () => {
-    //does it contain a property for the user\'s guess?
+  it('should be an instance of Turn', () => {
+    expect(turn).to.be.an.instanceof(Turn);
+  })
+
+  it('should store the user\'s guess', () => {
+    turn.guess = 'banana';
+
+    expect(turn.guess).to.equal('banana');
   })
 
   it.skip('should have current card as an object instance of Card', () => {
