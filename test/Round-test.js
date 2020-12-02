@@ -31,7 +31,7 @@ describe('Round', function() {
   });
 
   it('should keep a turn count', () => {
-    expect(round.turnCount).to.equal(0);
+    expect(round.turns).to.equal(0);
   });
 
   it('should have a place to hold incorrect Guesses', () => {
@@ -40,38 +40,31 @@ describe('Round', function() {
 
   it('should update turn count when a user takes a turn', () => {
     round.takeTurn();
-    expect(round.turnCount).to.equal(1);
+    expect(round.turns).to.equal(1);
     round.takeTurn();
-    expect(round.turnCount).to.equal(2);
+    expect(round.turns).to.equal(2);
   })
 
-  it('should create new instance of turn when guess is made', () => {
-    const falcon = round.takeTurn('peregrine falcon');
-    expect(falcon).to.be.an.instanceOf(Turn);
-  });
-
-
   it('should update current card to reflect next card in deck', () => {
-    round.takeTurn();
+    round.takeTurn('peregrine falcon');
     expect(round.currentCard).to.equal(card2);
     round.takeTurn();
     expect(round.currentCard).to.equal(card3);
   });
 
-  it.skip('should record and evaluate guess', () => {
-    //does it return correct or incorrect? (use turn method)
+  it('should store incorrect guesses', () => {
+    round.takeTurn('peregrine falcon');
+    expect(round.incorrectGuesses).to.have.lengthOf(0);
+    round.takeTurn('dove');
+    expect(round.incorrectGuesses).to.have.lengthOf(1);
+    expect(round.incorrectGuesses).to.include(card2.id);
   });
 
-  it.skip('should store incorrect guesses', () => {
-    //is there an array for incorrect guesses
-    //when takeTurn is called and it's an incorrect guess, is the array populated?
-    //when takeTurn is called and it's correct is the array not populated?
-    //does it store the card id only?
-
-  });
-
-  it.skip('should return feedback', () => {
-    //use turn method to get feedback
+  it('should give feedback on user\'s guess', () => {
+    const round1 = round.takeTurn('peregrine falcon');
+    const round2 = round.takeTurn('dove');
+    expect(round1).to.equal('Well done!');
+    expect(round2).to.equal('No good.');
   });
 
   it.skip('should be able to calculate correct guesses and return percentile', () => {
