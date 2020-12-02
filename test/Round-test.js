@@ -6,20 +6,27 @@ const Turn = require('../src/Turn');
 const Round = require('../src/Round');
 
 describe('Round', function() {
+  let round;
+  beforeEach(() => {
+    const card1 = new Card(3, 'What\'s the fastest animal on earth?', ['cheeta', 'sail fish', 'peregrine falcon'], 'peregrine falcon');
+    const card2 = new Card(8, 'What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?', ['dove', 'ruffed grouse', 'wild turkey'], 'wild turkey');
+    const card3 = new Card(10, 'What bird was woody the woodpecker modeled after?', ['pileated woodpecker', 'red-headed woodpecker', 'hairy woodpecker'], 'pileated woodpecker');
+    const card4 = new Card(44, 'What owl is known to say "Who cooks for you"?', ['short eared owl', 'barred owl', 'great horned owl'], 'barred owl');
+    const cards = [card1, card2, card3, card4];
+    const deck = new Deck(cards);
+    round = new Round(deck);
+  })
 
-  it.skip('should be an object instance of Round', () => {
-    //is round an instanceof Round
-
+  it('should have a deck populated with cards', () => {
+    expect(round.deck.cards).to.be.an('array');
+    expect(round.deck.cards).to.have.lengthOf.above(1);
   });
 
   it.skip('should return current card in play', () => {
+
     //is returnCurrentCard a method
     //does it return an object
     //is that object equal to an object in cards array of deck
-  });
-
-  it.skip('should contain takeTurn method', () => {
-    //is it a method
   });
 
 
