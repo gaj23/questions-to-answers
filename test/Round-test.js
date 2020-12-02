@@ -67,19 +67,18 @@ describe('Round', function() {
     expect(round2).to.equal('No good.');
   });
 
-  it.skip('should be able to calculate correct guesses and return percentile', () => {
-    //is it a method?
-    //do I get the right percentile based on correct guesses
-    //takeTurn fires with correct and incorrect answers
-    //
+  it('should be able to calculate correct guesses and return percentile', () => {
+    round.takeTurn('peregrine falcon');
+    round.takeTurn('dove');
+    expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
-  it.skip('should tell user when round is over', () => {
-
-  });
-
-  it.skip('should tell user percentile of correct answers at end of round', () => {
-
+  it('should tell user when round is over and their score', () => {
+    round.takeTurn('peregrine falcon');
+    round.takeTurn('dove');
+    round.takeTurn('hairy woodpecker');
+    round.takeTurn('barred owl');
+    expect(round.endRound()).to.equal('**Round over!** You answered 50% of the questions correctly!');
   });
 
 });
