@@ -13,14 +13,14 @@ class Turn {
   }
 
   evaluateGuess() {
-    let evaluation = this.guess === this.card.correctAnswer ?
+    const evaluation = this.guess === this.card.correctAnswer ?
       true : false;
     return evaluation;
   }
 
   giveFeedback() {
     const evaluation = this.evaluateGuess();
-    let feedback = evaluation === true ? 'Well done!' : 'No good.';
+    const feedback = evaluation === true ? 'Well done!' : 'No good.';
     return feedback;
   }
 }
