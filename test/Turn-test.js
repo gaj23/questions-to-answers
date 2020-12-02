@@ -5,8 +5,11 @@ const Turn = require('../src/Turn');
 
 describe('Turn', function() {
   let turn;
+  let card;
   beforeEach(() => {
-    return turn = new Turn();
+    const currentCard = new Card(8, 'What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?', ['dove', 'ruffed grouse', 'wild turkey'], 'wild turkey');
+    turn = new Turn('wild turkey', currentCard);
+    card = currentCard;
   })
 
   it('should be a function', () => {
@@ -18,52 +21,45 @@ describe('Turn', function() {
   })
 
   it('should store the user\'s guess', () => {
+    expect(turn.guess).to.equal('wild turkey');
     turn.guess = 'banana';
-
     expect(turn.guess).to.equal('banana');
   })
 
   it('should have current card as an object instance of Card', () => {
-    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-
-    turn.card = currentCard;
 
     expect(turn.card).to.be.an('object');
     expect(turn.card).to.deep.equal({
-      "id": 1,
-      "question": "What allows you to define a set of related information using key-value pairs?",
-      "answers": ["object", "array", "function"],
-      "correctAnswer": "object"
+      'id': 8,
+      'question': 'What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?',
+      'answers': ['dove', 'ruffed grouse', 'wild turkey'],
+      'correctAnswer': 'wild turkey'
     });
   })
 
   it('should return a guess', () => {
-    turn.guess = 'banana';
-    let returnedGuess = turn.returnGuess();
+    const returnedGuess = turn.returnGuess();
 
     expect(turn.returnGuess).to.be.a('function');
-    expect(returnedGuess).to.equal('banana');
+    expect(returnedGuess).to.equal('wild turkey');
     expect(returnedGuess).to.equal(turn.guess);
   })
 
   it('should return a card', () => {
-    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    turn.card = currentCard;
     let returnedCard = turn.returnCard();
 
     expect(turn.returnCard).to.be.a('function');
     expect(returnedCard).to.deep.equal({
-      "id": 1,
-      "question": "What allows you to define a set of related information using key-value pairs?",
-      "answers": ["object", "array", "function"],
-      "correctAnswer": "object"
+      'id': 8,
+      'question': 'What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?',
+      'answers': ['dove', 'ruffed grouse', 'wild turkey'],
+      'correctAnswer': 'wild turkey'
     });
   })
 
   it('should evaluate if user\'s guess matches card\'s correct answer', () => {
-    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    const truthyTurn = new Turn('object', currentCard);
-    const falsyTurn = new Turn('array', currentCard);
+    const truthyTurn = new Turn('wild turkey', card);
+    const falsyTurn = new Turn('dove', card);
     const trueTurn = truthyTurn.evaluateGuess();
     const falseTurn = falsyTurn.evaluateGuess();
 
@@ -72,20 +68,18 @@ describe('Turn', function() {
 
     expect(trueTurn).to.equal(true);
     expect(falseTurn).to.equal(false);
-  })
+  });
 
   it('should give user feedback based on their answer', () => {
-    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    const truthyTurn = new Turn('object', currentCard);
-    const falsyTurn = new Turn('array', currentCard);
+    const truthyTurn = new Turn('wild turkey', card);
+    const falsyTurn = new Turn('dove', card);
     const trueTurn = truthyTurn.giveFeedback();
     const falseTurn = falsyTurn.giveFeedback();
 
     expect(truthyTurn.giveFeedback).to.be.a('function');
     expect(falsyTurn.giveFeedback).to.be.a('function');
 
-
     expect(trueTurn).to.equal('Well done!');
     expect(falseTurn).to.equal('No good.');
-  })
-})
+  });
+});
