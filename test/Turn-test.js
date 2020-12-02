@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const Card = require('../src/Card');
-const Turn = require('../src/Card');
+const Turn = require('../src/Turn');
 
 describe('Turn', function() {
   let turn;
@@ -23,13 +23,27 @@ describe('Turn', function() {
     expect(turn.guess).to.equal('banana');
   })
 
-  it.skip('should have current card as an object instance of Card', () => {
-    //is the object instance contain the correct data? is it deep.equal?
+  it('should have current card as an object instance of Card', () => {
+    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+
+    turn.card = currentCard;
+
+    expect(turn.card).to.be.an('object');
+    expect(turn.card).to.deep.equal({
+      "id": 1,
+      "question": "What allows you to define a set of related information using key-value pairs?",
+      "answers": ["object", "array", "function"],
+      "correctAnswer": "object"
+    });
   })
 
-  it.skip('should return a guess', () => {
-    //does method exist
-    //does it return what's needed
+  it('should return a guess', () => {
+    turn.guess = 'banana';
+    let guess = turn.returnGuess();
+    console.log(turn.guess);
+    expect(turn.returnGuess).to.be.a('function');
+    expect(guess).to.equal('banana');
+    expect(guess).to.equal(turn.guess);
   })
 
   it.skip('should return a card', () => {
