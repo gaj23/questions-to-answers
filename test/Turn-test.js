@@ -60,10 +60,18 @@ describe('Turn', function() {
     });
   })
 
-  it.skip('should evaluate if user\'s guess matches card\'s correct answer', () => {
-    //does method exist
-    //does it return true if the answer is correct?
-    //does it return false if the answer is incorrect?
+  it('should evaluate if user\'s guess matches card\'s correct answer', () => {
+    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const truthyTurn = new Turn('object', currentCard);
+    const falsyTurn = new Turn('array', currentCard);
+    const trueTurn = truthyTurn.evaluateGuess();
+    const falseTurn = falsyTurn.evaluateGuess();
+
+    expect(truthyTurn.evaluateGuess).to.be.a('function');
+    expect(falsyTurn.evaluateGuess).to.be.a('function');
+
+    expect(trueTurn).to.equal(true);
+    expect(falseTurn).to.equal(false);
   })
 
   it.skip('should give user feedback based on their answer', () => {
