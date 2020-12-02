@@ -74,10 +74,18 @@ describe('Turn', function() {
     expect(falseTurn).to.equal(false);
   })
 
-  it.skip('should give user feedback based on their answer', () => {
-    //does method exist
-    //if evaluated to true, feedback should be correct
-    //if evaluated to false, feedback should be incorrect
+  it('should give user feedback based on their answer', () => {
+    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const truthyTurn = new Turn('object', currentCard);
+    const falsyTurn = new Turn('array', currentCard);
+    const trueTurn = truthyTurn.giveFeedback();
+    const falseTurn = falsyTurn.giveFeedback();
 
+    expect(truthyTurn.giveFeedback).to.be.a('function');
+    expect(falsyTurn.giveFeedback).to.be.a('function');
+
+
+    expect(trueTurn).to.equal('Well done!');
+    expect(falseTurn).to.equal('No good.');
   })
 })
