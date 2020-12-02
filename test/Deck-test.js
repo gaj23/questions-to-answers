@@ -16,17 +16,14 @@ describe('Deck', function() {
 
   it('should initlize with array of Card objects', () => {
     expect(deck.cards).to.be.an('array');
-    //is there anything else that needs to be checked? 
+    //is there anything else that needs to be checked?
   });
 
   it('should count how many cards there are', () => {
-
-
     expect(deck.countCards).to.be.a('function');
-    expect(deck.countCards()).to.be(4);
-    //is countCards a method?
-    //what is the length?
-    //does it return a length?
+    expect(deck.countCards()).to.equal(4);
+    expect(deck.cards).to.have.lengthOf(4);
+    expect(deck.cards.length).to.equal(deck.countCards());
   })
 
 })
