@@ -39,16 +39,25 @@ describe('Turn', function() {
 
   it('should return a guess', () => {
     turn.guess = 'banana';
-    let guess = turn.returnGuess();
-    console.log(turn.guess);
+    let returnedGuess = turn.returnGuess();
+
     expect(turn.returnGuess).to.be.a('function');
-    expect(guess).to.equal('banana');
-    expect(guess).to.equal(turn.guess);
+    expect(returnedGuess).to.equal('banana');
+    expect(returnedGuess).to.equal(turn.guess);
   })
 
-  it.skip('should return a card', () => {
-    //does method exists
-    //does it return a card
+  it('should return a card', () => {
+    const currentCard = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    turn.card = currentCard;
+    let returnedCard = turn.returnCard();
+
+    expect(turn.returnCard).to.be.a('function');
+    expect(returnedCard).to.deep.equal({
+      "id": 1,
+      "question": "What allows you to define a set of related information using key-value pairs?",
+      "answers": ["object", "array", "function"],
+      "correctAnswer": "object"
+    });
   })
 
   it.skip('should evaluate if user\'s guess matches card\'s correct answer', () => {
