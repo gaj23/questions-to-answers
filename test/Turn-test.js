@@ -7,9 +7,8 @@ describe('Turn', function() {
   let turn;
   let card;
   beforeEach(() => {
-    const currentCard = new Card(8, 'What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?', ['dove', 'ruffed grouse', 'wild turkey'], 'wild turkey');
-    turn = new Turn('wild turkey', currentCard);
-    card = currentCard;
+    card = new Card(8, 'What bird did Benjamin Franklin originally suggest to be the US\'s national symbol?', ['dove', 'ruffed grouse', 'wild turkey'], 'wild turkey');
+    turn = new Turn('wild turkey', card);
   })
 
   it('should be a function', () => {
